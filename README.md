@@ -34,3 +34,10 @@ $ npx next dev
 http://localhost:3000/ を開いて `Hello Next!` が表示されていることを確認します。
 
 簡単でしたね。
+
+# My Edit & Learning History
+
+## 2021-03-24
+
+- Completed watching the video
+- Environment construction completed
