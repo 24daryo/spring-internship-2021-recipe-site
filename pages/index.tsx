@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { getRecipes } from "../lib/recipe";
 import React from "react";
 
 import type { NextPage } from "next";
-import type { Recipe } from "../lib/recipe";
 
 // components
 import Header from "../components/Header";
@@ -31,11 +29,8 @@ const my_theme = createMuiTheme({
     },
   },
 });
-type Props = {
-  recipes: Recipe[];
-};
 
-const Home: NextPage<Props> = (props) => {
+const Home: NextPage = () => {
   //const { recipes } = props;
   //ページ番号だけを管理する
   //const [page, setPage] = useState<number>(1);
