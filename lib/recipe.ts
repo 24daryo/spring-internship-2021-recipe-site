@@ -26,7 +26,7 @@ export type RecipeListType = {
 };
 
 //API機能群
-export async function fetchRecipe(id: number): Promise<RecipeListType> {
+export async function fetchRecipeFromId(id: string): Promise<RecipeListType> {
   const key = process.env.NEXT_PUBLIC_API_KEY;
   const headers = {
     "X-Api-Key": key ? key : "",

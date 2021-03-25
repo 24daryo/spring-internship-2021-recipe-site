@@ -8,6 +8,9 @@ import { createStyles, fade, Theme, makeStyles } from "@material-ui/core/styles"
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
+import Link from "next/link";
+import { CardActionArea } from "@material-ui/core";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -75,9 +78,13 @@ export default function SearchAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            CookPad Intern Sample
-          </Typography>
+          <Link href="/">
+            <CardActionArea>
+              <Typography className={classes.title} variant="h6" noWrap>
+                CookPad Intern Sample
+              </Typography>
+            </CardActionArea>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

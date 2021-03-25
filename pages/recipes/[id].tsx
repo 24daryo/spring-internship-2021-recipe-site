@@ -1,8 +1,15 @@
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
-function RecipePage(){
-    const router = useRouter()
-    return <h1>Recipe Id: {router.query.id}</h1>
+import { RecipeDetails } from "../../components/RecipeDetails";
+
+function RecipePage() {
+  const router = useRouter();
+  const id = router.query.id;
+  if (id != null && typeof id == "string") {
+    return <RecipeDetails id={id} />;
+    //return <div> Hello</div>;
+  }
+  return <div></div>;
 }
 
 export default RecipePage;

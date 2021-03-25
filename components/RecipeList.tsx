@@ -19,19 +19,9 @@ export default function ImageGridList() {
     setRecipeList(recipes);
   };
 
-  // const ref = React.createRef<HTMLDivElement>();
-  // const scrollToBottomOfList = React.useCallback(() => {
-  //   ref!.current!.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "end",
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [ref]);
-
   //初期化の実行箇所
   React.useEffect(() => {
     init();
-    //scrollToBottomOfList();
   }, []);
 
   const clickNext = async () => {
