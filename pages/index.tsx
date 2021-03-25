@@ -53,7 +53,7 @@ const Home: NextPage<Props> = (props) => {
     <div style={{ backgroundColor: "#f7efee" }}>
       <Header />
       <Box textAlign="center" justifyContent="center">
-        <h1>Recipe Like Google</h1>
+        <h1>今週の新着レシピ</h1>
         <RecipeList />
       </Box>
     </div>
