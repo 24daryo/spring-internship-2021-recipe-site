@@ -7,9 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import { RecipeType } from "../lib/recipe";
 import { Box } from "@material-ui/core";
+
+import Link from "next/link";
+
 const useStyles = makeStyles({
   root: {
     // maxHeight: 350,
@@ -25,28 +27,31 @@ interface Props {
 export function RecipeCard(props: Props) {
   const classes = useStyles();
   const recipe = props.recipe;
+  const pages = "/recipes/" + recipe.id;
 
   return (
     <Card>
-      <CardActionArea className={classes.root}>
-        <CardMedia className={classes.media} image={recipe.image_url} title="Contemplative Reptile" />
-        <CardContent>
-          <Box height={150}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {recipe.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {recipe.description}
-            </Typography>
-          </Box>
-        </CardContent>
-        {/* <Button size="small" color="primary">
+      <Link href={pages}>
+        <CardActionArea className={classes.root}>
+          <CardMedia className={classes.media} image={recipe.image_url} title="Contemplative Reptile" />
+          <CardContent>
+            <Box height={150}>
+              <Typography gutterBottom variant="h5" component="h2">
+                {recipe.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {recipe.description}
+              </Typography>
+            </Box>
+          </CardContent>
+          {/* <Button size="small" color="primary">
           Share
         </Button>
         <Button size="small" color="primary">
           Learn More
         </Button> */}
-      </CardActionArea>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 }
