@@ -1,7 +1,8 @@
 import recipes from "../data/recipes.json";
 
 const url = "https://internship-recipe-api.ckpd.co/recipes";
-
+//const key = process.env.NEXT_PUBLIC_API_KEY;
+const key = process.env.API_KEY;
 export type RecipeType = {
   id: number;
   title: string;
@@ -32,7 +33,6 @@ export type RecipeListType = {
 
 //API機能群
 export async function fetchRecipeFromId(id: string): Promise<RecipeListType> {
-  const key = process.env.NEXT_PUBLIC_API_KEY;
   const headers = {
     "X-Api-Key": key ? key : "",
   };
@@ -46,7 +46,6 @@ export async function fetchRecipeFromId(id: string): Promise<RecipeListType> {
 }
 
 export async function fetchRecipeList(pageId: number): Promise<RecipeListType> {
-  const key = process.env.NEXT_PUBLIC_API_KEY;
   const headers = {
     "X-Api-Key": key ? key : "",
   };
@@ -60,7 +59,6 @@ export async function fetchRecipeList(pageId: number): Promise<RecipeListType> {
 }
 
 export async function fetchRecipeFromURL(input_url: string): Promise<RecipeListType> {
-  const key = process.env.NEXT_PUBLIC_API_KEY;
   const headers = {
     "X-Api-Key": key ? key : "",
   };

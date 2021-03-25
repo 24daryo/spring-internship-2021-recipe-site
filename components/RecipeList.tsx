@@ -59,6 +59,7 @@ export default function ImageGridList() {
     const recipes = recipeList.recipes;
     if (recipeList.links == null) return <div></div>;
     const links = recipeList.links;
+    if (recipes == []) return <div></div>;
 
     return (
       <Container maxWidth="md">
