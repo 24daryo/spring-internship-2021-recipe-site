@@ -24,7 +24,6 @@ interface Props {
 }
 export function RecipeCard(props: Props) {
   const classes = useStyles();
-  console.log(props.recipe);
   const recipe = props.recipe;
 
   return (

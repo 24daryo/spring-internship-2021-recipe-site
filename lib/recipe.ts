@@ -4,9 +4,9 @@ const url = "https://internship-recipe-api.ckpd.co/recipes";
 
 export type RecipeType = {
   id: number;
-  name: string;
+  title: string;
   description: string;
-  imageUrl: string | null;
+  image_url: string | null;
   steps: string[];
   ingredients: {
     name: string;
@@ -46,6 +46,20 @@ export async function fetchRecipeList(pageId: number): Promise<RecipeListType> {
     "X-Api-Key": key ? key : "",
   };
   const response = await fetch(`${url}?page=${pageId}`, {
+    method: "GET",
+    headers: headers,
+  });
+  const recipes: RecipeListType = await response.json();
+  console.log(recipes);
+  return recipes;
+}
+
+export async function fetchRecipeFromURL(input_url: string): Promise<RecipeListType> {
+  const key = process.env.NEXT_PUBLIC_API_KEY;
+  const headers = {
+    "X-Api-Key": key ? key : "",
+  };
+  const response = await fetch(`${input_url}`, {
     method: "GET",
     headers: headers,
   });

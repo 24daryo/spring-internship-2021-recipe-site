@@ -7,7 +7,7 @@ import RecipePagination from "./RecipePagination";
 import Footer from "./Footer";
 
 //library
-import { fetchRecipeList, RecipeListType, RecipeType } from "../lib/recipe";
+import { fetchRecipeFromURL, fetchRecipeList, RecipeListType, RecipeType } from "../lib/recipe";
 
 export default function ImageGridList() {
   //レシピはある保証なし
@@ -15,35 +15,70 @@ export default function ImageGridList() {
 
   //初期化
   const init = async () => {
-    const recipes = await fetchRecipeList(2);
+    const recipes = await fetchRecipeList(1);
     setRecipeList(recipes);
   };
+
+  // const ref = React.createRef<HTMLDivElement>();
+  // const scrollToBottomOfList = React.useCallback(() => {
+  //   ref!.current!.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "end",
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [ref]);
 
   //初期化の実行箇所
   React.useEffect(() => {
     init();
+    //scrollToBottomOfList();
   }, []);
 
+  const clickNext = async () => {
+    if (recipeList != null) {
+      const links = recipeList.links;
+      if (links.next != null) {
+        //次のページに遷移
+        console.log("次のページに遷移します");
+        const recipes = await fetchRecipeFromURL(links.next);
+        setRecipeList(recipes);
+      }
+    }
+  };
+
+  const clickPrev = async () => {
+    if (recipeList != null) {
+      const links = recipeList.links;
+      if (links.prev != null) {
+        //次のページに遷移
+        console.log("前のページに遷移します");
+        const recipes = await fetchRecipeFromURL(links.prev);
+        setRecipeList(recipes);
+      }
+    }
+  };
+
   interface Props {
-    recipes: RecipeType[];
+    recipeList: RecipeListType;
   }
   function Display(props: Props) {
+    const recipes = props.recipeList.recipes;
+    const links = props.recipeList.links;
     return (
-      <Box>
-        <Container maxWidth="md">
-          <Box borderColor="primary.main" justifyContent="center">
-            <Grid container direction="row" justify="center">
-              {props.recipes.map((recipe) => (
-                <Grid item sm={6} key={recipe.id}>
-                  <Box m={1} borderColor="primary.main">
-                    <RecipeCard recipe={recipe} />
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Container>
-      </Box>
+      <Container maxWidth="md">
+        <Box borderColor="primary.main" justifyContent="center">
+          <Grid container direction="row" justify="center">
+            {recipes.map((recipe) => (
+              <Grid item sm={6} key={recipe.id}>
+                <Box m={1} borderColor="primary.main">
+                  <RecipeCard recipe={recipe} />
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        <RecipePagination links={links} clickNext={clickNext} clickPrev={clickPrev} />
+      </Container>
     );
   }
 
@@ -51,8 +86,7 @@ export default function ImageGridList() {
     if (recipeList == null) return <h2>Loading</h2>;
     return (
       <div>
-        <Display recipes={recipeList.recipes} />
-        <RecipePagination />
+        <Display recipeList={recipeList} />
         <Footer />
       </div>
     );
