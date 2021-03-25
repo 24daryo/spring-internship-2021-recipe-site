@@ -2,6 +2,7 @@ import recipes from "../data/recipes.json";
 
 const url = "https://internship-recipe-api.ckpd.co/recipes";
 const key = process.env.NEXT_PUBLIC_API_KEY;
+
 //const key = process.env.API_KEY;
 export type RecipeType = {
   id: number;
