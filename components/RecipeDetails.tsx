@@ -115,12 +115,6 @@ export function RecipeDetails(props: Props) {
                   </Box>
                 </Box>
               </CardContent>
-              {/* <Button size="small" color="primary">
-        Share
-      </Button>
-      <Button size="small" color="primary">
-        Learn More
-      </Button> */}
             </Card>
           </Box>
         </Container>

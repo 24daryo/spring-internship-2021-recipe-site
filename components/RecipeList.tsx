@@ -52,8 +52,14 @@ export default function ImageGridList() {
     recipeList: RecipeListType;
   }
   function Display(props: Props) {
-    const recipes = props.recipeList.recipes;
-    const links = props.recipeList.links;
+    //エラーチェック
+    if (props.recipeList == null) return <div></div>;
+    const recipeList = props.recipeList;
+    if (recipeList.recipes == null) return <div></div>;
+    const recipes = recipeList.recipes;
+    if (recipeList.links == null) return <div></div>;
+    const links = recipeList.links;
+
     return (
       <Container maxWidth="md">
         <Box borderColor="primary.main" justifyContent="center">
@@ -73,7 +79,7 @@ export default function ImageGridList() {
   }
 
   function DisplayWithLoading() {
-    if (recipeList == null) return <h2>Loading</h2>;
+    if (recipeList == null) return <h2></h2>;
     return (
       <div>
         <Display recipeList={recipeList} />
