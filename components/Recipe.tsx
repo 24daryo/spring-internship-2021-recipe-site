@@ -28,6 +28,7 @@ export function RecipeCard(props: Props) {
   const classes = useStyles();
   const recipe = props.recipe;
   const pages = "/recipes/" + recipe.id;
+  if (recipe.image_url == null) recipe.image_url = "";
 
   return (
     <Card>
