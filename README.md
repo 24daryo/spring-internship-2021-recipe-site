@@ -41,3 +41,12 @@ http://localhost:3000/ を開いて `Hello Next!` が表示されていること
 
 - Completed watching the video
 - Environment construction completed
+
+## Tips
+
+Please refer to the following site to fill the margin of Body
+
+https://material-ui.com/components/css-baseline/
+
+.env を利用する際は以下のコマンドが必要
+yarn add dotenv
