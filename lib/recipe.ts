@@ -46,6 +46,19 @@ export async function fetchRecipeFromId(id: string): Promise<RecipeListType> {
   return recipes;
 }
 
+export async function fetchRecipeFromKeyword(keyword: string): Promise<RecipeListType> {
+  const headers = {
+    "X-Api-Key": key ? key : "",
+  };
+  //id = 6686030;
+  const response = await fetch(`https://internship-recipe-api.ckpd.co/search?keyword=${keyword}`, {
+    method: "GET",
+    headers: headers,
+  });
+  const recipes: RecipeListType = await response.json();
+  return recipes;
+}
+
 export async function fetchRecipeList(pageId: number): Promise<RecipeListType> {
   const headers = {
     "X-Api-Key": key ? key : "",

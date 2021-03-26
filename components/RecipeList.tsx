@@ -7,9 +7,9 @@ import ScrollToTop from "./ScrollToTop";
 import { RecipeCard } from "./Recipe";
 import RecipePagination from "./RecipePagination";
 import Footer from "./Footer";
-
+import Header from "./Header";
 //library
-import { fetchRecipeFromURL, fetchRecipeList, RecipeListType, RecipeType } from "../lib/recipe";
+import { fetchRecipeFromURL, fetchRecipeList, RecipeListType, fetchRecipeFromKeyword } from "../lib/recipe";
 
 export default function ImageGridList() {
   //レシピはある保証なし
@@ -24,30 +24,8 @@ export default function ImageGridList() {
   //初期化の実行箇所
   React.useEffect(() => {
     init();
+    console.log("更新更新");
   }, []);
-
-  var smoothScroll = function (range: number) {
-    var position = 0; // スクロールする位置
-    var progress = 0; // 現在の進捗 0 ～ 100
-    var easeOut = function (p: number) {
-      // ease-out に当てはめた値を返す
-      return p * (2 - p);
-    };
-    var move = function () {
-      // 実際にスクロールを行う
-      progress++; // 進捗を進める
-      position = range * easeOut(progress / 100); // スクロールする位置を計算する
-
-      window.scrollTo(0, position); // スクロールさせる
-
-      if (position < range) {
-        // 現在位置が目的位置より進んでいなければアニメーションを続行させる
-        requestAnimationFrame(move);
-      }
-    };
-
-    requestAnimationFrame(move); // 初回呼び出し
-  };
 
   const clickNext = async () => {
     if (recipeList != null) {
@@ -75,6 +53,19 @@ export default function ImageGridList() {
 
         window.scrollTo(0, 0);
       }
+    }
+  };
+
+  const [keywordValue, setValue] = React.useState("");
+
+  const Serch = async (text: string) => {
+    console.log("上から表示成功");
+    console.log(text);
+    setValue(text);
+    //ここで情報を変更する
+    if (text !== "") {
+      const recipes = await fetchRecipeFromKeyword(text);
+      setRecipeList(recipes);
     }
   };
 
@@ -113,8 +104,12 @@ export default function ImageGridList() {
     if (recipeList == null) return <h2></h2>;
     return (
       <div>
-        <Display recipeList={recipeList} />
-        <Footer />
+        <Box textAlign="center" justifyContent="center" fontFamily="Comic Sans MS" color="#333333">
+          <Header isTop={true} onClick={Serch} keyword={keywordValue} />
+          <h1>♪New Recipe♪</h1>
+          <Display recipeList={recipeList} />
+          <Footer />
+        </Box>
       </div>
     );
   }

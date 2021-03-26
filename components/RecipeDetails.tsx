@@ -38,13 +38,15 @@ export function RecipeDetails(props: Props) {
     return dt.toLocaleDateString();
   }
 
+  function Dammy() {}
+
   function RecipeMain() {
     //nullチェックする
     if (recipeList == null) return <h2>ページが見つかりませんでした</h2>;
     if (recipeList.recipes == null) return <h2>ページが見つかりませんでした</h2>;
     const recipe = recipeList.recipes[0];
     if (recipe.image_url == null) recipe.image_url = "";
-    console.log(recipe);
+    //console.log(recipe);
 
     return (
       <div>
@@ -57,24 +59,26 @@ export function RecipeDetails(props: Props) {
                   <Box textAlign="center" fontWeight={530} fontSize="h5.fontSize">
                     {recipe.title}
                   </Box>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {recipe.description}
-                  </Typography>
-                  <Box p={1}></Box>
-                  <Box display="block">
+                  <Box mr={2} ml={2} mt={1}>
                     <Typography variant="body2" color="textSecondary" component="p">
-                      投稿者　　　：{recipe.author.user_name}
+                      {recipe.description}
                     </Typography>
-                  </Box>
-                  <Box display="block">
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      レシピID　　：{recipe.id}
-                    </Typography>
-                  </Box>
-                  <Box display="block">
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      レシピ登録日：{recipeDate(recipe.published_at)}
-                    </Typography>
+                    <Box p={1}></Box>
+                    <Box display="block">
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        投稿者　　　：{recipe.author.user_name}
+                      </Typography>
+                    </Box>
+                    <Box display="block">
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        レシピID　　：{recipe.id}
+                      </Typography>
+                    </Box>
+                    <Box display="block">
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        レシピ登録日：{recipeDate(recipe.published_at)}
+                      </Typography>
+                    </Box>
                   </Box>
                   <Box p={2}>
                     <Divider />
@@ -86,7 +90,7 @@ export function RecipeDetails(props: Props) {
                   </Box>
                   <Box m={2}>
                     {recipe.ingredients.map((ingredient, id) => (
-                      <Grid container direction="row" justify="space-between" alignItems="center">
+                      <Grid container direction="row" justify="space-between" alignItems="center" key={id}>
                         <Grid item>
                           <Typography variant="body1" component="p">
                             {ingredient.name}
@@ -142,7 +146,7 @@ export function RecipeDetails(props: Props) {
     if (recipeList == null) return <h2></h2>;
     return (
       <div>
-        <Header isTop={false} />
+        <Header isTop={false} onClick={Dammy} keyword="" />
         <RecipeMain />
         <Footer />
       </div>

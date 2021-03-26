@@ -46,11 +46,7 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ backgroundColor: "#f7efee" }}>
-      <Header isTop={true} />
-      <Box textAlign="center" justifyContent="center" fontFamily="Comic Sans MS">
-        <h1>♪New Recipe♪</h1>
-        <RecipeList />
-      </Box>
+      <RecipeList />
     </div>
   );
 };
