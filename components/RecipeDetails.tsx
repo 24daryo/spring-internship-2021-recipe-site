@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Divider, Grid, GridList, GridListTile, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Divider, Grid, GridList, GridListTile, Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { fetchRecipeFromId, RecipeListType } from "../lib/recipe";
 import Footer from "./Footer";
@@ -32,6 +32,12 @@ export function RecipeDetails(props: Props) {
     init();
   }, []);
 
+  function recipeDate(dateIso: string) {
+    const ts = Date.parse(dateIso);
+    const dt = new Date(ts);
+    return dt.toLocaleDateString();
+  }
+
   function RecipeMain() {
     //nullチェックする
     if (recipeList == null) return <h2>ページが見つかりませんでした</h2>;
@@ -48,9 +54,9 @@ export function RecipeDetails(props: Props) {
               <CardMedia image={recipe.image_url} component="img" />
               <CardContent>
                 <Box>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Box textAlign="center" fontWeight={530} fontSize="h5.fontSize">
                     {recipe.title}
-                  </Typography>
+                  </Box>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {recipe.description}
                   </Typography>
@@ -67,7 +73,7 @@ export function RecipeDetails(props: Props) {
                   </Box>
                   <Box display="block">
                     <Typography variant="body2" color="textSecondary" component="p">
-                      レシピ登録日：{recipe.published_at}
+                      レシピ登録日：{recipeDate(recipe.published_at)}
                     </Typography>
                   </Box>
                   <Box p={2}>
@@ -105,7 +111,7 @@ export function RecipeDetails(props: Props) {
                     {recipe.steps.map((step, id) => (
                       <div>
                         <Box mt={1} color="primary.main" fontWeight="fontWeightBold" fontSize={16}>
-                          STEP {id}
+                          STEP {id + 1}
                         </Box>
                         <Typography variant="body2" component="p">
                           {step}
@@ -116,6 +122,15 @@ export function RecipeDetails(props: Props) {
                 </Box>
               </CardContent>
             </Card>
+            <Box m={2} justifyContent="center" textAlign="center">
+              <Link href="/">
+                <Button variant="contained" color="primary">
+                  <Box component="span" display="block" width={270}>
+                    一覧に戻る
+                  </Box>
+                </Button>
+              </Link>
+            </Box>
           </Box>
         </Container>
       </div>
@@ -127,7 +142,7 @@ export function RecipeDetails(props: Props) {
     if (recipeList == null) return <h2></h2>;
     return (
       <div>
-        <Header />
+        <Header isTop={false} />
         <RecipeMain />
         <Footer />
       </div>

@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
 import Link from "next/link";
-import { CardActionArea } from "@material-ui/core";
+import { Button, CardActionArea } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,10 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block",
-      },
+      // display: "none",
+      // [theme.breakpoints.up("sm")]: {
+      //   display: "block",
+      // },
+      display: "block",
     },
     search: {
       position: "relative",
@@ -68,8 +69,36 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchAppBar() {
+interface Props {
+  isTop: boolean;
+}
+export default function SearchAppBar(props: Props) {
   const classes = useStyles();
+
+  function reset() {
+    window.location.reload();
+  }
+  function clickPrev() {
+    if (props.isTop == true) {
+      return (
+        <CardActionArea>
+          <Typography className={classes.title} variant="h6" noWrap>
+            <a onClick={reset}>CookPad Internship Sample</a>
+          </Typography>
+        </CardActionArea>
+      );
+    } else {
+      return (
+        <Link href="/">
+          <CardActionArea>
+            <Typography className={classes.title} variant="h6" noWrap>
+              CookPad Internship Sample
+            </Typography>
+          </CardActionArea>
+        </Link>
+      );
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -78,13 +107,7 @@ export default function SearchAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
-          <Link href="/">
-            <CardActionArea>
-              <Typography className={classes.title} variant="h6" noWrap>
-                CookPad Intern Sample
-              </Typography>
-            </CardActionArea>
-          </Link>
+          {clickPrev()}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

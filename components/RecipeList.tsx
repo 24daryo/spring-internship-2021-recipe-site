@@ -1,6 +1,8 @@
 import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 
+import ScrollToTop from "./ScrollToTop";
+
 //component
 import { RecipeCard } from "./Recipe";
 import RecipePagination from "./RecipePagination";
@@ -24,6 +26,29 @@ export default function ImageGridList() {
     init();
   }, []);
 
+  var smoothScroll = function (range: number) {
+    var position = 0; // スクロールする位置
+    var progress = 0; // 現在の進捗 0 ～ 100
+    var easeOut = function (p: number) {
+      // ease-out に当てはめた値を返す
+      return p * (2 - p);
+    };
+    var move = function () {
+      // 実際にスクロールを行う
+      progress++; // 進捗を進める
+      position = range * easeOut(progress / 100); // スクロールする位置を計算する
+
+      window.scrollTo(0, position); // スクロールさせる
+
+      if (position < range) {
+        // 現在位置が目的位置より進んでいなければアニメーションを続行させる
+        requestAnimationFrame(move);
+      }
+    };
+
+    requestAnimationFrame(move); // 初回呼び出し
+  };
+
   const clickNext = async () => {
     if (recipeList != null) {
       const links = recipeList.links;
@@ -32,6 +57,9 @@ export default function ImageGridList() {
         console.log("次のページに遷移します");
         const recipes = await fetchRecipeFromURL(links.next);
         setRecipeList(recipes);
+
+        window.scrollTo(0, 0);
+        //smoothScroll(0);
       }
     }
   };
@@ -44,6 +72,8 @@ export default function ImageGridList() {
         console.log("前のページに遷移します");
         const recipes = await fetchRecipeFromURL(links.prev);
         setRecipeList(recipes);
+
+        window.scrollTo(0, 0);
       }
     }
   };

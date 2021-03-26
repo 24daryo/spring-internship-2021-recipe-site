@@ -46,9 +46,9 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ backgroundColor: "#f7efee" }}>
-      <Header />
-      <Box textAlign="center" justifyContent="center">
-        <h1>今週の新着レシピ</h1>
+      <Header isTop={true} />
+      <Box textAlign="center" justifyContent="center" fontFamily="Comic Sans MS">
+        <h1>♪New Recipe♪</h1>
         <RecipeList />
       </Box>
     </div>

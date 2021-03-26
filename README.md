@@ -50,3 +50,5 @@ https://material-ui.com/components/css-baseline/
 
 .env を利用する際は以下のコマンドが必要
 yarn add dotenv
+
+npm install --se-exact @babel/runtime@7.0.0-beta.55
