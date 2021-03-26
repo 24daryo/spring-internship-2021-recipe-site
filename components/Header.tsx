@@ -160,6 +160,22 @@ export default function SearchAppBar(props: Props) {
     }
   }
 
+  function serchButton() {
+    if (props.isTop == true) {
+      return (
+        <div>
+          <Button onClick={clickbutton} color="inherit">
+            <Box ml={-2} mt={1} borderRadius="50%">
+              <SearchIcon />
+            </Box>
+          </Button>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -169,11 +185,7 @@ export default function SearchAppBar(props: Props) {
           </IconButton>
           {clickPrev()}
           {clickSerch()}
-          <Button onClick={clickbutton} color="inherit">
-            <Box ml={-2} borderRadius="50%">
-              <SearchIcon />
-            </Box>
-          </Button>
+          {serchButton()}
         </Toolbar>
       </AppBar>
     </div>

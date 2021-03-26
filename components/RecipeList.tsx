@@ -69,6 +69,11 @@ export default function ImageGridList() {
     }
   };
 
+  function getHeight() {
+    const top = window.innerHeight;
+    return top;
+  }
+
   interface Props {
     recipeList: RecipeListType;
   }
@@ -76,7 +81,16 @@ export default function ImageGridList() {
     //エラーチェック
     if (props.recipeList == null) return <div></div>;
     const recipeList = props.recipeList;
-    if (recipeList.recipes == null) return <div></div>;
+    if (recipeList.recipes == null)
+      return (
+        <div>
+          <Box mt={5} mb={10} fontFamily="Comic Sans MS" color="#333333">
+            レシピが見つかりませんでした
+          </Box>
+          <img src="https://s3-ap-northeast-1.amazonaws.com/hoiku-fine-s3-production/contents/wp-content/uploads/2017/12/23163750/a1f2790d23318964457a93e1e3bfa2c8.png" width="300"></img>
+          <Box height={getHeight()}></Box>
+        </div>
+      );
     const recipes = recipeList.recipes;
     if (recipeList.links == null) return <div></div>;
     const links = recipeList.links;
@@ -106,7 +120,7 @@ export default function ImageGridList() {
       <div>
         <Box textAlign="center" justifyContent="center" fontFamily="Comic Sans MS" color="#333333">
           <Header isTop={true} onClick={Serch} keyword={keywordValue} />
-          <h1>♪New Recipe♪</h1>
+          <h1>♪Happy Recipe♪</h1>
           <Display recipeList={recipeList} />
           <Footer />
         </Box>
